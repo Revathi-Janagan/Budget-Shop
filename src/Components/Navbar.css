@@ -1,0 +1,56 @@
+.navbar {
+  position: fixed;
+  width: 100%;
+  padding: 20px;
+  height: 95px;
+  border-radius: 10px;
+  margin-top: 20px;
+  z-index: 1000;
+  background: radial-gradient(circle at 25%, rgba(238, 163, 65, 0.1), rgba(238, 163, 65, 0.7) 70%);
+  backdrop-filter: blur(10px); /* Add a blur effect */
+}
+
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.logo-set {
+  width: 100px;
+  height: 100%;
+  margin-right: 200px;
+  transform: scale(1.8);
+}
+.navbar-nav .nav-item .nav-link {
+  color: rgb(72, 21, 21);
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #f2a03b; /* Specify your desired hover color */
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: rgb(237, 162, 42); /* Adjust the brand text color */
+}
+
+.form-control {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Adjust the form input background color and transparency */
+  color: white;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
