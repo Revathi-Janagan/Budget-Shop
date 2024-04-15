@@ -50,23 +50,19 @@ const Navbar = () => {
             <li className="nav-item text-center mx-2 mx-lg-1">
               <NavLink className="nav-link" to="#">
                 <div>
-                  <i className="fas fa-bell fa-lg mb-1"></i>
-                  <span className="badge rounded-pill badge-notification bg-info">
-                    11
-                  </span>
+                <i className="fas fa-user-circle fa-lg mb-1"></i>
+                 
                 </div>
-                Messages
+                Sign In
               </NavLink>
             </li>
             <li className="nav-item text-center mx-2 mx-lg-1">
               <NavLink className="nav-link" to="#">
                 <div>
-                  <i className="fas fa-globe-americas fa-lg mb-1"></i>
-                  <span className="badge rounded-pill badge-notification bg-success">
-                    11
-                  </span>
+                <i className="fas fa-shopping-cart fa-lg mb-1"></i>
+                
                 </div>
-                News
+                Add To Cart
               </NavLink>
             </li>
           </ul>

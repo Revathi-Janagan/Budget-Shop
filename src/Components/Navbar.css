@@ -6,10 +6,13 @@
   border-radius: 10px;
   margin-top: 20px;
   z-index: 1000;
-  background: radial-gradient(circle at 25%, rgba(238, 163, 65, 0.1), rgba(238, 163, 65, 0.7) 70%);
+  background: radial-gradient(
+    circle at 25%,
+    rgba(238, 163, 65, 0.1),
+    rgba(238, 163, 65, 0.7) 70%
+  );
   backdrop-filter: blur(10px); /* Add a blur effect */
 }
-
 
 .navbar-nav {
   display: flex;
@@ -37,9 +40,9 @@
 
 .form-control {
   background-color: rgba(
-    255,
-    255,
-    255,
+    203,
+    144,
+    28,
     0.2
   ); /* Adjust the form input background color and transparency */
   color: white;
@@ -47,10 +50,11 @@
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #f0a946;
   border: none;
+  color: #553911;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #5b250e;
 }

@@ -30,6 +30,7 @@ const Login = () => {
   };
 
   return (
+    <div className='login'>
     <div className="row">
       <div className="col-md-6 mx-auto p-0">
         <div className="card">
@@ -112,6 +113,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
