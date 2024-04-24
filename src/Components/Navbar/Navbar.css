@@ -1,17 +1,17 @@
 .navbar {
-  position: fixed;
+  position:sticky;
   width: 100%;
   padding: 20px;
   height: 95px;
   border-radius: 10px;
-  margin-top: 20px;
+  margin-top: 20px !important;
   z-index: 1000;
   background: radial-gradient(
     circle at 25%,
     rgba(238, 163, 65, 0.1),
     rgba(238, 163, 65, 0.7) 70%
   );
-  backdrop-filter: blur(10px); /* Add a blur effect */
+  backdrop-filter: blur(10px); 
 }
 
 .navbar-nav {
@@ -30,12 +30,12 @@
 }
 
 .navbar-nav .nav-item .nav-link:hover {
-  color: #f2a03b; /* Specify your desired hover color */
+  color: #f2a03b; 
 }
 
 .navbar-brand {
   font-size: 1.5rem;
-  color: rgb(237, 162, 42); /* Adjust the brand text color */
+  color: rgb(237, 162, 42); 
 }
 
 .form-control {
@@ -44,17 +44,26 @@
     144,
     28,
     0.2
-  ); /* Adjust the form input background color and transparency */
+  ); 
   color: white;
   border: none;
 }
+.custom-nav-signin {
+  margin-right: 75px;
+}
 
-.btn-primary {
+ .custom-btn-search {
   background-color: #f0a946;
   border: none;
   color: #553911;
+  font-weight: 600;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 7px 20px;
 }
 
-.btn-primary:hover {
+.custom-btn-search:hover {
   background-color: #5b250e;
+  color: aliceblue;
+  font-weight: 600;
 }

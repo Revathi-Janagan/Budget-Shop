@@ -1,7 +1,7 @@
 .front-slide {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Center vertically */
+  align-items: center;
   border-radius: 30px;
   width: 100%;
   height: 400px;
@@ -9,6 +9,72 @@
   background: radial-gradient(circle, #e9e6df, #f3be82);
 }
 
+.hamburger-split {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 10px;
+  margin-left: 10px;
+  z-index: 1;
+}
+
+.hamburger-icon {
+  font-size: 30px;
+  color: #512222;
+  margin-left: 30px;
+  margin-top: -50px;
+  z-index: 1;
+  cursor: pointer;
+}
+.menu {
+  position: absolute;
+  width: 250px;
+  top: 50px;
+  left: 10px;
+  display: none;
+  background-color: #edd0a6;
+  padding: 10px;
+  border-radius: 15px;
+  z-index: 2;
+  cursor: pointer;
+}
+.menu .custom-btn {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #3e0a0a;
+  font-size: 18px;
+  text-align: center;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu .custom-btn:hover {
+  /* background-color: #f0f0f0;  */
+  color: #e6e2de;
+}
+
+.menu.open {
+  display: block; 
+}
+
+.menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.menu button:hover {
+  background-color: #5b2626; /* Hover background color */
+}
 
 @keyframes pulseAnimation {
   0% {
@@ -71,12 +137,17 @@
   text-align: center;
 }
 .custom-btn-buy {
-  background-color:#f09d3e; 
- font-weight: 800;
- font-size: 24px;
- border-radius: 35px;
- padding: 5px 30px; 
-
+  background-color: #f09d3e;
+  font-weight: 800;
+  font-size: 24px;
+  border-radius: 35px;
+  padding: 5px 30px;
+  border-color: transparent;
+}
+.custom-btn-buy:hover{
+  background-color: #5b2626;
+  color: #e6e2de;
+  border-color: transparent;
 }
 .social-links {
   display: flex;
@@ -90,7 +161,7 @@
 }
 
 .social-links:hover {
-  background-color: #efe9e4; /* Change background color on hover */
+  background-color: #d5cece; /* Change background color on hover */
 }
 
 .social-icon {

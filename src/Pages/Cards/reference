@@ -1,0 +1,311 @@
+cimport React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import "./CardGroup.css";
+
+const Card = ({ product }) => {
+  return (
+    <div className="col">
+      <div className="card h-100 shadow-sm">
+        <img src={product.thumbnail} className="card-img-top" alt="Product" />
+        <div className="card-body">
+          <div className="clearfix mb-3">
+            <span className="float-start badge rounded-pill bg-secondary">{product.brand}</span>
+            <span className="float-end price-hp">{product.price}&euro;</span>
+          </div>
+          <h5 className="card-title">{product.title}</h5>
+          <div className="text-center my-4">
+            <a href="#" className="btn btn-warning">Check offer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CardGroup = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const loader = useRef(null);
+
+  useEffect(() => {
+    loadProducts();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleObserver, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0
+    });
+
+    if (loader.current) {
+      observer.observe(loader.current);
+    }
+
+    return () => {
+      if (loader.current) {
+        observer.unobserve(loader.current);
+      }
+    };
+
+  }, []);
+
+  const loadProducts = () => {
+    setIsLoading(true);
+    axios.get(`https://dummyjson.com/products?page=${page}`)
+      .then(response => {
+        if (response.data.products.length === 0) {
+          setHasMore(false);
+          return;
+        }
+        setProducts(prevProducts => [...prevProducts, ...response.data.products]);
+        setIsLoading(false);
+        console.log("Response is:", response.data.products);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setIsLoading(false);
+      });
+  };
+
+  const handleObserver = (entities) => {
+    const target = entities[0];
+    if (target.isIntersecting && hasMore) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  return (
+    <main>
+      <div className="container-fluid bg-transparent my-4 p-3" style={{ position: "relative" }}>
+        <div className="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+          {Array.isArray(products) && products.map((product, index) => (
+            <Card key={product.id} product={product} />
+          ))}
+        </div>
+        {isLoading &&
+          <div ref={loader} className="text-center mt-3">
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        }
+        {!isLoading && !hasMore &&
+          <div className="text-center mt-3">
+            <p>No more products to load.</p>
+          </div>
+        }
+      </div>
+    </main>
+  );
+};
+
+export default CardGroup;
+// .card {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+  width: 100%; 
+  max-width: 250px; /* Set the maximum width of the card */
+  height: 300px ;
+  max-height: 350px !important;;
+  margin:auto;
+}
+
+.card:hover {
+  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 30%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  font-size: 0.9rem;
+}
+
+.price-hp {
+  font-size: 1.1rem;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+  color: #212529;
+}
+
+.row-cols-1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.row-cols-1 > * {
+  flex-basis: calc(100% - 2rem);
+  max-width: calc(100% - 2rem);
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 576px) {
+  .row-cols-xs-2 > * {
+    flex-basis: calc(50% - 2rem);
+    max-width: calc(50% - 2rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .row-cols-sm-2 > * {
+    flex-basis: calc(50% - 2rem);
+    max-width: calc(50% - 2rem);
+  }
+}
+
+@media (min-width: 992px) {
+  .row-cols-lg-4 > * {
+    flex-basis: calc(25% - 2rem);
+    max-width: calc(25% - 2rem);
+  }
+}
+
+
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import "./CardGroup.css";
+
+const Card = ({ product }) => {
+  return (
+    <div className="col">
+      <div className="card h-100 shadow-sm">
+        <img src={product.thumbnail} className="card-img-top" alt="Product" />
+        <div className="card-body">
+          <div className="clearfix mb-3">
+            <span className="float-start badge rounded-pill bg-secondary">{product.brand}</span>
+            <span className="float-end price-hp">{product.price}&euro;</span>
+          </div>
+          <h5 className="card-title">{product.title}</h5>
+          <div className="text-center my-4">
+            <a href="#" className="btn btn-warning">Check offer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CardGroup = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const loader = useRef(null);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    // }
+
+    loadProducts();
+
+  }, [page]);
+
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(handleObserver, {
+  //     root: null,
+  //     rootMargin: "0px",
+  //     threshold: 1.0
+  //   });
+
+  //   if (loader.current) {
+  //     observer.observe(loader.current);
+  //   }
+
+  //   return () => {
+  //     if (loader.current) {
+  //       observer.unobserve(loader.current);
+  //     }
+  //   };
+
+  // }, []);
+
+  const loadProducts = () => {
+    // setIsLoading(true);
+    axios.get(`https://dummyjson.com/products?page=${page}`)
+      .then(response => {
+        // if (response.data.products.length === 0) {
+        //   setHasMore(false);
+        //   return;
+        // }
+        setProducts(prevProducts => [...prevProducts, ...response.data.products]);
+        // setIsLoading(false);
+        console.log("Response is:", response.data.products);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        // setIsLoading(false);
+      });
+  };
+
+  // const handleObserver = (entities) => {
+  //   const target = entities[0];
+  //   if (target.isIntersecting && hasMore) {
+  //     setPage((prevPage) => prevPage + 1);
+  //   }
+  // };
+
+  return (
+    <main>
+      <div className="container-fluid bg-transparent my-4 p-3" style={{ position: "relative" }}>
+        <div className="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+          {products.map((product, index) => (
+            <Card key={product.id} product={product} />
+          ))}
+        </div>
+        {/* {isLoading &&
+          <div ref={loader} className="text-center mt-3">
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        }
+        {!isLoading && !hasMore &&
+          <div className="text-center mt-3">
+            <p>No more products to load.</p>
+          </div>
+        } */}
+      </div>
+    </main>
+  );
+};
+
+export default CardGroup;
