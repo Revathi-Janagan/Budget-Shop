@@ -8,7 +8,7 @@ const Card = ({ product, onSelectProduct }) => {
   const handleClick = () => {
     if (product) {       
       onSelectProduct(product);
-      console.log("Product after click", product);
+      console.log("Product after click is", product);
       navigate("/productshow");
     }
   };
