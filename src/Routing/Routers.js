@@ -34,9 +34,14 @@ const router = createBrowserRouter([
         path: "/cards",
         element: <CardGroup />,
       },
+     
       {
-        path: "/productshow",
+        path: "/productshow/:productId",
         element: <Product />,
+      },
+      {
+        path: "/productshow", // Define the route without a specific product ID
+        element: <Product />, // Render the Product component
       },
     ],
   },

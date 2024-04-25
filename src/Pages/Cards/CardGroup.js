@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import axios from "axios";
 import Card from "./Card";
 import shuffle from "lodash.shuffle";
-import Product from "../../Components/Product/Product";
+import { useNavigate } from "react-router-dom";
 import "./CardGroup.css";
 
 const CardGroup = ({ limit }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const loader = useRef(null);
   const isFirstRender = useRef(true);
+  const navigate = useNavigate(); // Add useNavigate hook
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -70,10 +69,6 @@ const CardGroup = ({ limit }) => {
     }
   };
 
-  const handleSelectProduct = (product) => {
-    setSelectedProduct(product);
-  };
-
   return (
     <main>
       <div
@@ -85,15 +80,10 @@ const CardGroup = ({ limit }) => {
           style={{ marginTop: "0px", marginLeft: "100px" }}
         >
           {products.slice(0, limit).map((product, index) => (
-            <Card
-              key={product.id}
-              product={product}
-              onSelectProduct={handleSelectProduct}
-            />
+            <Card key={product.id} product={product} />
           ))}
         </div>
 
-        {selectedProduct && <Product product={selectedProduct} />}
         {isLoading && (
           <div ref={loader} className="text-center mt-3">
             <span

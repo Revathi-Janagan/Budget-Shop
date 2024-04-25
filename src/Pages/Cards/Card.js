@@ -1,16 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import "./CardGroup.css";
 
-const Card = ({ product, onSelectProduct }) => {
-  const navigate = useNavigate();
+const Card = ({ product }) => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleClick = () => {
-    if (product) {       
-      onSelectProduct(product);
-      console.log("Product after click is", product);
-      navigate("/productshow");
-    }
+    navigate(`/productshow/${product.id}`); // Navigate to product show page with product ID
   };
 
   const discountedPrice = (
@@ -18,6 +14,7 @@ const Card = ({ product, onSelectProduct }) => {
     (1 - product.discountPercentage / 100)
   ).toFixed(2);
   const finalPrice = (product.price * 88.89 - discountedPrice).toFixed(2);
+
   return (
     <div className="col">
       <div className="card h-100 shadow-sm">
@@ -46,7 +43,14 @@ const Card = ({ product, onSelectProduct }) => {
               className="btn btn-warning"
               onClick={handleClick}
             >
-              Check offer
+             Buy
+            </button>
+            <button
+              type="button"
+              className="btn btn-warning m-3"
+            
+            >
+             Add to Cart
             </button>
           </div>
         </div>
