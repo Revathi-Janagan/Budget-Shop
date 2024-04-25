@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import axios from "axios";
 import Card from "./Card";
 import shuffle from "lodash.shuffle";
@@ -70,7 +71,6 @@ const CardGroup = ({ limit }) => {
   };
 
   const handleSelectProduct = (product) => {
-    console.log("Selected product:", product); 
     setSelectedProduct(product);
   };
 
@@ -92,6 +92,7 @@ const CardGroup = ({ limit }) => {
             />
           ))}
         </div>
+
         {selectedProduct && <Product product={selectedProduct} />}
         {isLoading && (
           <div ref={loader} className="text-center mt-3">
