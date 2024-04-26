@@ -39,10 +39,10 @@ const router = createBrowserRouter([
         path: "/productshow/:productId",
         element: <Product />,
       },
-      {
-        path: "/productshow", // Define the route without a specific product ID
-        element: <Product />, // Render the Product component
-      },
+      // {
+      //   path: "/productshow", 
+      //   element: <Product />,
+      // },
     ],
   },
 ]);

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Card from "./Card";
 import shuffle from "lodash.shuffle";
-import { useNavigate } from "react-router-dom";
+
 import "./CardGroup.css";
 
 const CardGroup = ({ limit }) => {
@@ -12,7 +12,6 @@ const CardGroup = ({ limit }) => {
   const [hasMore, setHasMore] = useState(true);
   const loader = useRef(null);
   const isFirstRender = useRef(true);
-  const navigate = useNavigate(); // Add useNavigate hook
 
   useEffect(() => {
     if (isFirstRender.current) {

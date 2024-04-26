@@ -1,12 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useNavigate } from "react-router-dom"; 
 import "./CardGroup.css";
 
 const Card = ({ product }) => {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate(); 
 
   const handleClick = () => {
-    navigate(`/productshow/${product.id}`); // Navigate to product show page with product ID
+    navigate(`/productshow/${product.id}`); 
   };
 
   const discountedPrice = (
@@ -43,14 +43,10 @@ const Card = ({ product }) => {
               className="btn btn-warning"
               onClick={handleClick}
             >
-             Buy
+              Buy
             </button>
-            <button
-              type="button"
-              className="btn btn-warning m-3"
-            
-            >
-             Add to Cart
+            <button type="button" className="btn btn-warning m-3">
+              Add to Cart
             </button>
           </div>
         </div>
