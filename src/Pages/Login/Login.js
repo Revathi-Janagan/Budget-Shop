@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./Login.css";
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
   };
   const handleInputChangeSignup = (e) => {
     const { name, value } = e.target;
-    setLoginFormData((prevState) => ({
+    setSignupFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -30,7 +31,24 @@ const Login = () => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    console.log("Login Details:", setLoginFormData);
+    e.preventDefault();
+
+  axios.post('https://dummyjson.com/auth/login', {
+    username: 'srevathisona@gmail.com',
+    password: 'Srevathi@1234',
+    expiresInMins: 30 // optional, defaults to 60
+  }, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    console.log('Login Success:', response.data);
+    
+  })
+  .catch(error => {
+    console.error('Login Error:', error);    
+  });
   };
 
   const handleSignupSubmit = (e) => {

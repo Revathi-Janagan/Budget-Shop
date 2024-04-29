@@ -3,12 +3,12 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./Product.css";
 import { Carousel } from "react-bootstrap";
-import StarRating from "./StarRating";
-import SetQuantity from "./SetQuantity";
 
 const Product = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+
+  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -85,33 +85,27 @@ const Product = () => {
                     &#8377;{(product.price * 88.89).toFixed(2)}
                   </span>
                   <div>
-                    <br />
-                    <span className="float-end discounted-final-price-product">
-                      &#8377;{finalPrice}
-                      <span className="discount-percentage">
-                        {product.discountPercentage}% off
-                      </span>
-                    </span>
-                  </div>
-                  <div>
-                    <p className="card-text-rating">
-                      {/* <strong>Rating:</strong> */}
-                      <p className="fas fa-star rating">{product.rating}</p>
-                      {/* <StarRating rating={product.rating} maxStars={5} />{" "}
-                      <span className="tooltiptext">{product.rating}</span> */}
-                    </p>
-                  </div>
-                  <div className="quantity-container">
-                    <p>Quantity:</p>
-                    <SetQuantity />
-                  </div>
+              <span className="float-end discounted-final-price">
+                &#8377;{finalPrice}
+                <span className="discount-percentage">
+                  {product.discountPercentage}% off
+                </span>
+              </span>
+            </div>
+                 
+                  <p className="card-text">
+                    <strong>Rating:</strong> {product.rating}
+                  </p>
+                  <p className="card-text">
+                    <strong>Stock:</strong> {product.stock}
+                  </p>
+                  <p className="card-text">
+                    <strong>Discount Percentage:</strong>{" "}
+                    {product.discountPercentage}
+                  </p>
 
-                  <hr />
-                  <button className="btn btn-primary custom-button-buy">
-                    Buy
-                  </button>
-                  <button className="btn btn-primary custom-button-addcart">
-                    Add To Cart
+                  <button className="btn btn-primary cutom-button-addcart">
+                    Add to Cart
                   </button>
                 </div>
               </div>
