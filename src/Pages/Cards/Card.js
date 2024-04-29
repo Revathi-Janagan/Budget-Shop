@@ -1,12 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; 
+import { useAuth } from "../../Context/AuthContext";
 import "./CardGroup.css";
 
 const Card = ({ product }) => {
   const navigate = useNavigate(); 
+  const { addToCart } = useAuth();
+  
 
   const handleClick = () => {
     navigate(`/productshow/${product.id}`); 
+  };
+  const handleAddToCart = () => {
+    addToCart(); // Call the addToCart function to increment the cart count
+    
   };
 
   const discountedPrice = (
@@ -43,9 +50,9 @@ const Card = ({ product }) => {
               className="btn btn-warning"
               onClick={handleClick}
             >
-              Buy
+              View
             </button>
-            <button type="button" className="btn btn-warning m-3">
+            <button type="button" className="btn btn-warning m-3" onClick={handleAddToCart} >
               Add to Cart
             </button>
           </div>

@@ -3,12 +3,13 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./Product.css";
 import { Carousel } from "react-bootstrap";
-import StarRating from "./StarRating";
+import { useAuth } from "../../Context/AuthContext";
 import SetQuantity from "./SetQuantity";
 
 const Product = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+  const { addToCart } = useAuth();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,6 +34,10 @@ const Product = () => {
     (1 - product.discountPercentage / 100)
   ).toFixed(2);
   const finalPrice = (product.price * 88.89 - discountedPrice).toFixed(2);
+  const handleAddToCart = () => {
+    addToCart(); // Call the addToCart function to increment the cart count
+    
+  };
 
   return (
     <div className="container mt-5">
@@ -95,10 +100,7 @@ const Product = () => {
                   </div>
                   <div>
                     <p className="card-text-rating">
-                      {/* <strong>Rating:</strong> */}
                       <p className="fas fa-star rating">{product.rating}</p>
-                      {/* <StarRating rating={product.rating} maxStars={5} />{" "}
-                      <span className="tooltiptext">{product.rating}</span> */}
                     </p>
                   </div>
                   <div className="quantity-container">
@@ -110,7 +112,7 @@ const Product = () => {
                   <button className="btn btn-primary custom-button-buy">
                     Buy
                   </button>
-                  <button className="btn btn-primary custom-button-addcart">
+                  <button className="btn btn-primary custom-button-addcart" onClick={handleAddToCart}>
                     Add To Cart
                   </button>
                 </div>

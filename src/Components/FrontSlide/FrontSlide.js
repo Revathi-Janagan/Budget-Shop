@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Slide from "../../Assets/slide1.png";
+import { useAuth } from "../../Context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -15,6 +16,7 @@ import CardGroup from "../../Pages/Cards/CardGroup";
 const FrontSlide = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { username } = useAuth();
   const handleClick = () => {
     navigate("/cards");
   }
@@ -43,7 +45,13 @@ const FrontSlide = () => {
       </div>
 
       <div className="store-info">
+
         <h1>"Your Pathway to Shopping Bliss!"</h1>
+        {username ? (
+        <p>Welcome, {username}!</p>
+      ) : (
+        <p>Welcome, guest! Sign in to access personalized features.</p>
+      )}
         <p>
           Your ultimate destination for unlocking the joy of shopping. At our
           digital emporium, we've curated a treasure trove of products to cater

@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 import Logovideo from "../../Assets/LogoFinal.gif";
+
 import "./Navbar.css";
 
 const Navbar = () => {
+  const { logout,cartCount } = useAuth();  
+  console.log("Cart Count is", cartCount)
+
+  const handleLogout = () => {
+    logout();
+  };
+  
   return (
     <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
@@ -74,8 +83,17 @@ const Navbar = () => {
               <NavLink className="nav-link" to="#">
                 <div>
                   <i className="fas fa-shopping-cart fa-lg mb-1"></i>
+                  <span className="badge bg-success">{cartCount}</span>
                 </div>
                 Cart
+              </NavLink>
+            </li>
+            <li className="nav-item text-center mx-2 mx-lg-1">
+              <NavLink className="nav-link" to="/" onClick={handleLogout}>
+                <div>
+                  <i className="fas fa-sign-out-alt fa-lg mb-1"></i>
+                </div>
+                Sign Out
               </NavLink>
             </li>
           </ul>

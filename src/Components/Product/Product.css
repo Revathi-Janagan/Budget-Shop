@@ -46,6 +46,7 @@
   font-weight: 600;
   font-style: italic;
   color: rgb(115, 67, 8);
+  text-transform: capitalize;
 }
 
 .product-description {
@@ -77,6 +78,7 @@
 .quantity-container {
   display: flex;
   align-items: flex-start;
+  gap: 15px;
 }
 .custom-button-buy {
   background-color: #eebd73;
@@ -89,6 +91,7 @@
   transition: background-color 0.3s;
   font-weight: 700;
   margin-right: 20px;
+  margin-left: 200px;
 }
 
 .custom-button-buy:hover {

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 import axios from "axios";
 import "./Login.css";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("login");
+  const navigate = useNavigate();
+  const { setUsernameValue, isLoggedIn, login } = useAuth();
   const [loginFormData, setLoginFormData] = useState({
     loginUserName: "",
     loginPassword: "",
@@ -21,6 +25,7 @@ const Login = () => {
       [name]: value,
     }));
   };
+  
   const handleInputChangeSignup = (e) => {
     const { name, value } = e.target;
     setSignupFormData((prevState) => ({
@@ -28,29 +33,45 @@ const Login = () => {
       [name]: value,
     }));
   };
+  
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    e.preventDefault();
-
-  axios.post('https://dummyjson.com/auth/login', {
-    username: 'srevathisona@gmail.com',
-    password: 'Srevathi@1234',
-    expiresInMins: 30 // optional, defaults to 60
-  }, {
-    headers: {
-      'Content-Type': 'application/json'
+  
+    // Check if username and password are not empty
+    if (!loginFormData.loginUserName || !loginFormData.loginPassword) {
+      alert("Please enter both username and password.");
+      return;
     }
-  })
-  .then(response => {
-    console.log('Login Success:', response.data);
-    
-  })
-  .catch(error => {
-    console.error('Login Error:', error);    
-  });
+  
+    axios
+      .post(
+        'https://dummyjson.com/auth/login',
+        {
+          username: loginFormData.loginUserName, //kminchelle
+          password: loginFormData.loginPassword, //0lelplR
+          expiresInMins: 30,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then((response) => {
+        console.log('Login Success:', response.data);
+        alert('Login Success');
+        const { username } = response.data; // Extract the username from the response
+        setUsernameValue(username); // Update the username in the AuthContext
+        login();
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error('Login Error:', error);
+        alert('Login failed. Please try again.');
+      });
   };
-
+  
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     console.log("Signup Details:", setSignupFormData);
@@ -96,6 +117,7 @@ const Login = () => {
                       <input
                         id="login-user"
                         type="text"
+                        name="loginUserName"
                         className="input"
                         placeholder="Enter your username"
                         value={loginFormData.loginUserName}
@@ -109,6 +131,7 @@ const Login = () => {
                       <input
                         id="login-pass"
                         type="password"
+                        name="loginPassword"
                         className="input"
                         placeholder="Enter your password"
                         value={loginFormData.loginPassword}
@@ -147,6 +170,7 @@ const Login = () => {
                       <input
                         id="signup-user"
                         type="text"
+                        name="signupUserName"
                         className="input"
                         placeholder="Create your Username"
                         value={signupFormData.signupUserName}
@@ -160,6 +184,7 @@ const Login = () => {
                       <input
                         id="signup-pass"
                         type="password"
+                        name="signupPassword"
                         className="input"
                         placeholder="Create your password"
                         value={signupFormData.signupPassword}
@@ -173,6 +198,7 @@ const Login = () => {
                       <input
                         id="signup-repeat-pass"
                         type="text"
+                        name="signupMobileNo"
                         className="input"
                         placeholder="Enter your Mobile Number"
                         value={signupFormData.signupMobileNo}
@@ -186,6 +212,7 @@ const Login = () => {
                       <input
                         id="signup-email"
                         type="text"
+                        name="signupEmail"
                         className="input"
                         placeholder="Enter your email address"
                         value={signupFormData.signupEmail}
