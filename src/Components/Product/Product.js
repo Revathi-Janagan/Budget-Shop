@@ -36,14 +36,13 @@ const Product = () => {
   const finalPrice = (product.price * 88.89 - discountedPrice).toFixed(2);
   const handleAddToCart = () => {
     addToCart(); // Call the addToCart function to increment the cart count
-    
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
       <div className="row justify-content-center">
         <div className="col-md-9">
-          <div className="custom-card">
+          <div className="custom-card-product">
             <div className="row g-0">
               <div className="col-md-4 carousel">
                 <Carousel>
@@ -73,9 +72,10 @@ const Product = () => {
                       alt="Thumbnail"
                     />
                   </span>
-                  <br />
-                  <br />
-                  <h3 className="card-title product-brand">{product.brand}</h3>
+
+                  <h3 className="card-title text-center product-brand">
+                    {product.brand}
+                  </h3>
                   <span className="float-start badge rounded-pill bg-success capitalize">
                     {product.category}
                   </span>
@@ -85,7 +85,6 @@ const Product = () => {
                   <p className="card-text product-description">
                     {product.description}
                   </p>
-
                   <span className="float-end price-hp">
                     &#8377;{(product.price * 88.89).toFixed(2)}
                   </span>
@@ -103,8 +102,8 @@ const Product = () => {
                       <p className="fas fa-star rating">{product.rating}</p>
                     </p>
                   </div>
-                  <div className="quantity-container">
-                    <p>Quantity:</p>
+                  <div className="d-flex align-items-center">
+                    <p className="me-3">Quantity:</p>
                     <SetQuantity />
                   </div>
 
@@ -112,7 +111,10 @@ const Product = () => {
                   <button className="btn btn-primary custom-button-buy">
                     Buy
                   </button>
-                  <button className="btn btn-primary custom-button-addcart" onClick={handleAddToCart}>
+                  <button
+                    className="btn btn-primary custom-button-addcart"
+                    onClick={handleAddToCart}
+                  >
                     Add To Cart
                   </button>
                 </div>

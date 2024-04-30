@@ -4,19 +4,20 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const setUsernameValue = (name) => {
     setUsername(name);
   };
-  
-  const logout = () => {   
-    setUsername("");  
+
+  const logout = () => {
+    setUsername("");
   };
 
-  const login = () => {    
-    setIsLoggedIn(true); 
+  const login = () => {
+    setIsLoggedIn(true);
   };
   const addToCart = () => {
     setCartCount((prevCount) => {
@@ -24,9 +25,25 @@ export const AuthProvider = ({ children }) => {
       return prevCount + 1;
     });
   };
-  
+
+  const setSearchTermValue = (term) => {
+    setSearchTerm(term);
+  };
+
   return (
-    <AuthContext.Provider value={{ username, setUsernameValue, logout , isLoggedIn,addToCart,cartCount , login}}>
+    <AuthContext.Provider
+      value={{
+        username,
+        setUsernameValue,
+        logout,
+        isLoggedIn,
+        addToCart,
+        cartCount,
+        login,
+        searchTerm,
+        setSearchTermValue 
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

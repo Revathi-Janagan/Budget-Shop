@@ -1,5 +1,5 @@
 .navbar {
-  position:sticky;
+  position: sticky;
   width: 100%;
   padding: 20px;
   height: 95px;
@@ -25,8 +25,13 @@
   margin-right: 200px;
   transform: scale(1.8);
 }
-.navbar-nav .nav-item .nav-link {
+
+.navbar-nav .nav-link {
   color: rgb(72, 21, 21);
+}
+
+.navbar-nav .nav-link.active {
+  color: #3a864d;
 }
 
 .navbar-nav .nav-item .nav-link:hover {
@@ -48,11 +53,12 @@
   color: white;
   border: none;
 }
+
 .custom-nav-signin {
   margin-right: 25px;
 }
 
- .custom-btn-search {
+.custom-btn-search {
   background-color: #f0a946;
   border: none;
   color: #553911;

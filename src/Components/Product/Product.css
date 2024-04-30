@@ -1,10 +1,11 @@
-.custom-card {
+.custom-card-product {
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 24px 28px rgba(0, 0, 0, 0.1);
   width: 1000px;
   height: 550px !important;
+ 
   background: linear-gradient(
     135deg,
     rgba(249, 221, 185, 1) 0%,
@@ -77,9 +78,11 @@
 }
 .quantity-container {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   gap: 15px;
 }
+
 .custom-button-buy {
   background-color: #eebd73;
   color: #140b0b;

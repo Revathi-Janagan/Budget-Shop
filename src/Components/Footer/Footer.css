@@ -1,0 +1,18 @@
+.footer{
+    background: radial-gradient(circle, #e9e6df, #f3be82);
+    margin: auto;
+}
+
+
+.quick-links ul,
+.legal ul {
+    list-style-type: none;
+    padding: 0;
+}
+.quick-links ul a:hover{
+    color: #f3be82;
+}
+
+.legal ul :hover {
+   color: #f3be82;
+}

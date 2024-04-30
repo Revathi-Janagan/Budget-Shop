@@ -1,0 +1,69 @@
+.contact-container {
+  background-image: url("../../Assets/contact1.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 70vh;
+  max-height: 80vh;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  margin-top: 100px;
+}
+
+.address,
+.contact-info { 
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 100px;
+}
+
+.address h2,
+.contact-info h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.custom-card {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  height: 350px !important;
+  width: 300px !important;
+}
+
+.custom-card .card-header {
+  background-color: #eeb47d;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 15px 25px; 
+  margin-bottom: 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+.custom-card .card-body-contact {
+  padding: 20px; 
+}
+
+.contact-img {
+  max-width: 100%;
+  height: auto;
+  background: none;
+  animation: slideLeft 7s linear infinite;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(300px); /* Start position off-screen to the right */
+  }
+  100% {
+    transform: translateX(-300px); /* End position off-screen to the left */
+  }
+}
