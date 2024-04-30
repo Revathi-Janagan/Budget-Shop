@@ -6,7 +6,8 @@ import Product from "../Components/Product/Product";
 import CardGroup from "../Pages/Cards/CardGroup";
 import Footer from "../Components/Footer/Footer";
 import ContactUs from "../Pages/Contact Us/ContactUs";
-import AboutUs from "../Pages/Cards/About Us/AboutUs";
+import AboutUs from "../Pages/About Us/AboutUs";
+import ViewCart from "../Pages/View Cart/ViewCart";
 
 const Layout = () => {
   return (
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path : "/about",
         element : <AboutUs />
+      },
+      {
+        path : "/viewcart",
+        element : <ViewCart />
       }
      
     ],

@@ -12,7 +12,7 @@ const CardGroup = ({ limit }) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const loader = useRef(null);
-  const { searchTerm } = useAuth();
+  const { searchTerm ,errorMessage} = useAuth();
 
   useEffect(() => {
     loadProducts();
@@ -50,12 +50,16 @@ const CardGroup = ({ limit }) => {
 
   
 
+
+  
+
   return (
     <main>
       <div
         className="container-fluid bg-transparent my-4 p-3"
         style={{ position: "relative" }}
       >
+         {errorMessage && <p className="text-danger">{errorMessage}</p>}
         <div
           className="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-2"
           style={{ marginTop: "0px", marginLeft: "100px" }}

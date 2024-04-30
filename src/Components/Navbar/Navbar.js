@@ -94,7 +94,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item text-center mx-2 mx-lg-1">
-                <NavLink className="nav-link" to="#">
+                <NavLink className="nav-link" to="/viewcart">
                   <div>
                     <i className="fas fa-shopping-cart fa-lg mb-1"></i>
                     <span className="badge bg-success">{cartCount}</span>

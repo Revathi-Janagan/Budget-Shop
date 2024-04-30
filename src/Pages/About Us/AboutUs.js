@@ -1,5 +1,5 @@
 import React from "react";
-import About from "../../../Assets/aboutus.png";
+import About from "../../Assets/aboutus.png";
 
 import "./AboutUs.css";
 

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -7,6 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [cartItems, setCartItems] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(""); // State variable for error message
 
   const setUsernameValue = (name) => {
     setUsername(name);
@@ -19,16 +22,38 @@ export const AuthProvider = ({ children }) => {
   const login = () => {
     setIsLoggedIn(true);
   };
-  const addToCart = () => {
-    setCartCount((prevCount) => {
-      console.log("Previous Cart Count:", prevCount);
-      return prevCount + 1;
-    });
+
+  const addToCart = (product) => {
+    const isAlreadyInCart = cartItems.some(item => item.id === product.id);
+
+    if (isAlreadyInCart) {
+      setErrorMessage("Product is already in the cart.");
+      alert("Product is already in the cart.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+      return;
+    }
+
+    setCartItems((prevCartItems) => [...prevCartItems, product]);
+    console.log("Cart Items are", product);
+    setCartCount((prevCount) => prevCount + 1);
+  };
+
+  const removeFromCart = (productId) => {
+    setCartItems((prevCartItems) =>
+      prevCartItems.filter(item => item.id !== productId)
+    );
+    setCartCount(prevCount => prevCount - 1); // Decrease cart count by 1
   };
 
   const setSearchTermValue = (term) => {
     setSearchTerm(term);
   };
+
+  useEffect(() => {
+    console.log("Cart Items are in use effect", cartItems);
+  }, [cartItems]);
 
   return (
     <AuthContext.Provider
@@ -41,7 +66,11 @@ export const AuthProvider = ({ children }) => {
         cartCount,
         login,
         searchTerm,
-        setSearchTermValue 
+        setSearchTermValue,
+        cartItems,
+        errorMessage, 
+        setErrorMessage, 
+        removeFromCart
       }}
     >
       {children}

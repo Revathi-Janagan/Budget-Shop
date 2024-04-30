@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import "./Product.css";
 import { Carousel } from "react-bootstrap";
 import { useAuth } from "../../Context/AuthContext";
+import { calculateFinalPrice } from "../../Helpers/Util/Utils";
 import SetQuantity from "./SetQuantity";
 
 const Product = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
-  const { addToCart } = useAuth();
+  const { addToCart, errorMessage } = useAuth();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -29,14 +30,14 @@ const Product = () => {
   if (!product) {
     return <div>Loading...</div>;
   }
-  const discountedPrice = (
-    product.price *
-    (1 - product.discountPercentage / 100)
-  ).toFixed(2);
-  const finalPrice = (product.price * 88.89 - discountedPrice).toFixed(2);
+ 
   const handleAddToCart = () => {
-    addToCart(); // Call the addToCart function to increment the cart count
+    addToCart(product); // Call the addToCart function to increment the cart count
   };
+  const finalPrice = calculateFinalPrice(
+    product.price,
+    product.discountPercentage
+  );
 
   return (
     <div className="container mt-5 mb-5">
@@ -44,6 +45,7 @@ const Product = () => {
         <div className="col-md-9">
           <div className="custom-card-product">
             <div className="row g-0">
+              {errorMessage && <p className="text-danger">{errorMessage}</p>}
               <div className="col-md-4 carousel">
                 <Carousel>
                   {product.images.map((image, index) => (
