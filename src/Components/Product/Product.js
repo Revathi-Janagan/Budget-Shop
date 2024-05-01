@@ -5,7 +5,6 @@ import "./Product.css";
 import { Carousel } from "react-bootstrap";
 import { useAuth } from "../../Context/AuthContext";
 import { calculateFinalPrice } from "../../Helpers/Util/Utils";
-import SetQuantity from "./SetQuantity";
 
 const Product = () => {
   const { productId } = useParams();
@@ -32,8 +31,9 @@ const Product = () => {
   }
  
   const handleAddToCart = () => {
-    addToCart(product); // Call the addToCart function to increment the cart count
+    addToCart(product);
   };
+  
   const finalPrice = calculateFinalPrice(
     product.price,
     product.discountPercentage
@@ -75,9 +75,9 @@ const Product = () => {
                     />
                   </span>
 
-                  <h3 className="card-title text-center product-brand">
+                  <h2 className="card-title text-center product-brand">
                     {product.brand}
-                  </h3>
+                  </h2>
                   <span className="float-start badge rounded-pill bg-success capitalize">
                     {product.category}
                   </span>
@@ -103,10 +103,6 @@ const Product = () => {
                     <p className="card-text-rating">
                       <p className="fas fa-star rating">{product.rating}</p>
                     </p>
-                  </div>
-                  <div className="d-flex align-items-center">
-                    <p className="me-3">Quantity:</p>
-                    <SetQuantity />
                   </div>
 
                   <hr />

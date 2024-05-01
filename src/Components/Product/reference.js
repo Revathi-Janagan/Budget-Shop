@@ -3,12 +3,15 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./Product.css";
 import { Carousel } from "react-bootstrap";
+import { useAuth } from "../../Context/AuthContext";
+import { calculateFinalPrice } from "../../Helpers/Util/Utils";
+import SetQuantity from "./SetQuantity";
 
 const Product = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
-
-  
+  const { addToCart, errorMessage } = useAuth();
+  const [quantity, setQuantity] = useState(1); 
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,18 +31,23 @@ const Product = () => {
   if (!product) {
     return <div>Loading...</div>;
   }
-  const discountedPrice = (
-    product.price *
-    (1 - product.discountPercentage / 100)
-  ).toFixed(2);
-  const finalPrice = (product.price * 88.89 - discountedPrice).toFixed(2);
+ 
+  const handleAddToCart = (quantity = 1) => {
+    addToCart(product, quantity);
+  };
+  
+  const finalPrice = calculateFinalPrice(
+    product.price,
+    product.discountPercentage
+  );
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
       <div className="row justify-content-center">
         <div className="col-md-9">
-          <div className="custom-card">
+          <div className="custom-card-product">
             <div className="row g-0">
+              {errorMessage && <p className="text-danger">{errorMessage}</p>}
               <div className="col-md-4 carousel">
                 <Carousel>
                   {product.images.map((image, index) => (
@@ -68,9 +76,10 @@ const Product = () => {
                       alt="Thumbnail"
                     />
                   </span>
-                  <br />
-                  <br />
-                  <h3 className="card-title product-brand">{product.brand}</h3>
+
+                  <h3 className="card-title text-center product-brand">
+                    {product.brand}
+                  </h3>
                   <span className="float-start badge rounded-pill bg-success capitalize">
                     {product.category}
                   </span>
@@ -80,32 +89,37 @@ const Product = () => {
                   <p className="card-text product-description">
                     {product.description}
                   </p>
-
                   <span className="float-end price-hp">
                     &#8377;{(product.price * 88.89).toFixed(2)}
                   </span>
                   <div>
-              <span className="float-end discounted-final-price">
-                &#8377;{finalPrice}
-                <span className="discount-percentage">
-                  {product.discountPercentage}% off
-                </span>
-              </span>
-            </div>
-                 
-                  <p className="card-text">
-                    <strong>Rating:</strong> {product.rating}
-                  </p>
-                  <p className="card-text">
-                    <strong>Stock:</strong> {product.stock}
-                  </p>
-                  <p className="card-text">
-                    <strong>Discount Percentage:</strong>{" "}
-                    {product.discountPercentage}
-                  </p>
+                    <br />
+                    <span className="float-end discounted-final-price-product">
+                      &#8377;{finalPrice}
+                      <span className="discount-percentage">
+                        {product.discountPercentage}% off
+                      </span>
+                    </span>
+                  </div>
+                  <div>
+                    <p className="card-text-rating">
+                      <p className="fas fa-star rating">{product.rating}</p>
+                    </p>
+                  </div>
+                  <div className="d-flex align-items-center">
+                    <p className="me-3">Quantity:</p>
+                    <SetQuantity quantity={quantity} setQuantity={setQuantity} />
+                  </div>
 
-                  <button className="btn btn-primary cutom-button-addcart">
-                    Add to Cart
+                  <hr />
+                  <button className="btn btn-primary custom-button-buy">
+                    Buy
+                  </button>
+                  <button
+                    className="btn btn-primary custom-button-addcart"
+                    onClick={handleAddToCart}
+                  >
+                    Add To Cart
                   </button>
                 </div>
               </div>

@@ -1,0 +1,126 @@
+.view-cart-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background: linear-gradient(
+    135deg,
+    rgba(249, 221, 185, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgb(242, 213, 213) 100%
+  );
+  }
+
+  .scrolling-header-container {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 30px;
+  }
+  
+  .scrolling-header {
+    display: inline-block;
+    margin-right: 100%; 
+    animation: scroll infinite linear 5s;
+    color: #540d14;
+    font-style: italic;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(800px);
+    }
+    100% {
+      transform: translateX(-800px);
+    }
+  }
+  
+  .view-cart-item .thumbnail {
+    width: 250px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 30px;
+  }
+  
+  .view-cart-item .title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  
+  .view-cart-item .description {
+    color: #6c757d;
+  }
+  
+  .view-cart-item .quantity-input {
+    width: 80px;
+  }
+  
+  .view-cart-item .remove-btn {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+  }
+  
+  .view-cart-item .remove-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+  
+  .quantity-label {
+    font-weight: bold;
+  }
+  
+  .quantity-input {
+    width: 70px; /* Adjust width as needed */
+  }
+  
+  .subtotal-label {
+    font-weight: bold;
+    color: #333; /* Adjust color as needed */
+  }
+
+  
+.quantity-input {
+    width: 100%;
+    padding: 0.375rem 0.75rem; 
+    font-size: 1rem; 
+    line-height: 1.5; 
+    color: #43171b; 
+    background-color: #eacba1; 
+    background-clip: padding-box;
+    border: 1px solid #ced4da; 
+    border-radius: 3px; 
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+  }
+  
+ 
+  .quantity-input:focus {
+    border-color: #80bdff;
+    outline: 0; 
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  .container-buy{
+    margin-left: 500px;
+    margin-bottom: 20px;
+  }
+  
+  .total-label {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 20px;
+  }
+  .total-amount {
+    font-size: 20px; 
+    font-weight: bold; 
+    color: #5c1a25; 
+    margin-left: 10px; 
+    border: 1px solid #5c1a25 ;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  .buy-btn {
+    width: 100%;
+  }
+  

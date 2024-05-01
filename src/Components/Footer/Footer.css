@@ -1,18 +1,21 @@
-.footer{
-    background: radial-gradient(circle, #e9e6df, #f3be82);
-    margin: auto;
+.footer {
+  background: radial-gradient(circle, #e9e6df, #f3be82);
+  margin: auto;
+  position:relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
-
 
 .quick-links ul,
 .legal ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
-.quick-links ul a:hover{
-    color: #f3be82;
+.quick-links ul a:hover {
+  color: #f3be82;
 }
 
 .legal ul :hover {
-   color: #f3be82;
+  color: #f3be82;
 }

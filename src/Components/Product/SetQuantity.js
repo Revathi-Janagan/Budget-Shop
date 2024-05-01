@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 
-const SetQuantity = () => {
-  const [quantity, setQuantity] = useState(1);
+const SetQuantity = ({ quantity: initialQuantity, setQuantity }) => {
+  const [quantity, setInternalQuantity] = useState(initialQuantity);
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      setInternalQuantity(quantity - 1);
+      setQuantity(quantity - 1); // Update parent component's quantity state
     }
   };
 
   const increaseQuantity = () => {
-    setQuantity(quantity + 1);
+    setInternalQuantity(quantity + 1);
+    setQuantity(quantity + 1); // Update parent component's quantity state
   };
 
   return (
     <div className="input-group">
       <button
-        className="button-minus btn btn-secondary "
+        className="button-minus btn btn-secondary"
         onClick={decreaseQuantity}
         style={{
           padding: "0.2rem 0.4rem",

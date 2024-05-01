@@ -3,7 +3,7 @@ import { useAuth } from "../../Context/AuthContext";
 import axios from "axios";
 import Card from "./Card";
 import shuffle from "lodash.shuffle";
-
+import { useLocation } from "react-router-dom";
 import "./CardGroup.css";
 
 const CardGroup = ({ limit }) => {
@@ -12,11 +12,13 @@ const CardGroup = ({ limit }) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const loader = useRef(null);
-  const { searchTerm ,errorMessage} = useAuth();
+  const { searchTerm, errorMessage } = useAuth();
+  const location = useLocation();
+  const category = new URLSearchParams(location.search).get("category");
 
   useEffect(() => {
     loadProducts();
-  }, [page, searchTerm]); // Load products whenever the page or search term changes
+  }, [page, searchTerm, category]); // Load products whenever the page, search term, or category changes
 
   const loadProducts = () => {
     setIsLoading(true);
@@ -27,10 +29,14 @@ const CardGroup = ({ limit }) => {
           setHasMore(false);
           return;
         }
+        let filteredProducts = response.data.products;
+        if (category) {
+          filteredProducts = filteredProducts.filter((product) => product.category === category);
+        }
         setProducts((prevProducts) =>
           page === 1
-            ? shuffle(response.data.products) // If it's the first page, shuffle the products
-            : [...prevProducts, ...response.data.products]
+            ? shuffle(filteredProducts) // If it's the first page, shuffle the filtered products
+            : [...prevProducts, ...filteredProducts]
         );
         setIsLoading(false);
         console.log("Response is:", response.data.products);
@@ -41,50 +47,23 @@ const CardGroup = ({ limit }) => {
       });
   };
 
-  const handleObserver = (entities) => {
-    const target = entities[0];
-    if (target.isIntersecting && hasMore) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  
-
-
-  
-
+ 
   return (
     <main>
-      <div
-        className="container-fluid bg-transparent my-4 p-3"
-        style={{ position: "relative" }}
-      >
-         {errorMessage && <p className="text-danger">{errorMessage}</p>}
-        <div
-          className="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-2"
-          style={{ marginTop: "0px", marginLeft: "100px" }}
-        >
+      <div className="container-fluid bg-transparent my-4 p-3" style={{ position: "relative" }}>
+        {errorMessage && <p className="text-danger">{errorMessage}</p>}
+        <div className="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-2" style={{ marginTop: "0px", marginLeft: "100px" }}>
           {products
-            .filter((product) =>
-              product.title.toLowerCase().includes(searchTerm.toLowerCase())
-            )
+            .filter((product) => product.title.toLowerCase().includes(searchTerm.toLowerCase()))
             .slice(0, limit)
             .map((product, index) => (
-              <Card
-                key={product.id}
-                product={product}
-                
-              />
+              <Card key={product.id} product={product} />
             ))}
         </div>
 
         {isLoading && (
           <div ref={loader} className="text-center mt-3">
-            <span
-              className="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             <span className="visually-hidden">Loading...</span>
           </div>
         )}

@@ -138,17 +138,7 @@ const Login = () => {
                         onChange={handleInputChangeLogin}
                       />
                     </div>
-                    <div className="group">
-                      <input
-                        id="login-check"
-                        type="checkbox"
-                        className="check"
-                        defaultChecked
-                      />
-                      <label htmlFor="login-check">
-                        <span className="icon"></span> Keep me Signed in
-                      </label>
-                    </div>
+                    
                     <div className="group">
                       <button type="submit" className="button">
                         Sign In

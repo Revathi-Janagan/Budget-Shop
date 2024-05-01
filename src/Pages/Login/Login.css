@@ -127,9 +127,7 @@
 .login-space .group .check:checked + label {
   color: #530e0e;
 }
-.login-space .group .check:checked + label .icon {
-  background: #f1f1e3;
-}
+
 *,
 :after,
 :before {

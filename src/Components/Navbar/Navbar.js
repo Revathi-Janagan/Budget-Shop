@@ -5,11 +5,12 @@ import Logovideo from "../../Assets/LogoFinal.gif";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const { logout, cartCount, setSearchTermValue, searchTerm } = useAuth();
+  const { logout, cartCount, setSearchTermValue, searchTerm,cartItems } = useAuth();
 
   const handleLogout = () => {
     logout();
   };
+  const dynamicCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <>
@@ -70,7 +71,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
             </ul>
-            <form className="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
+            {/* <form className="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
               <input
                 type="search"
                 className="form-control"
@@ -82,7 +83,7 @@ const Navbar = () => {
                
               />               
              
-            </form>
+            </form> */}
 
             <ul className="navbar-nav custom-nav-signin ms-auto d-flex flex-row mt-3 mt-lg-0">
               <li className="nav-item text-center mx-2 mx-lg-1">

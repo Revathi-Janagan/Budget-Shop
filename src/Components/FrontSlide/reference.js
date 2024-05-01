@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Slide from "../../Assets/slide1.png";
 import { useAuth } from "../../Context/AuthContext";
@@ -17,28 +17,12 @@ const FrontSlide = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { username } = useAuth();
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = () => {
-    fetch('https://dummyjson.com/products/categories')
-      .then(res => res.json())
-      .then(data => setCategories(data))
-      .catch(error => console.error('Error fetching categories:', error));
-  };
 
   const handleClick = (category) => {
-    if (category === "All") {
-      navigate("/cards");
-    } else {
-      navigate(`/cards?category=${category}`);
-    }
+    // Here you can perform the logic to fetch products based on the selected category
+    // For now, let's just navigate to the "/cards" route
+    navigate("/cards");
   };
-
-  
 
   return (
     <div className="front-slide">
@@ -51,11 +35,24 @@ const FrontSlide = () => {
       </div>
 
       <div className={`menu ${isMenuOpen ? "open" : ""}`}>
-        {categories.map((category, index) => (
-          <button key={index} className="btn custom-btn m-0" onClick={() => handleClick(category)}>
-            {category}
-          </button>
-        ))}
+        <button className="btn  custom-btn m-0" onClick={() => handleClick("Skin Care")}>
+          Skin Care
+        </button>
+        <button className="btn  custom-btn m-0" onClick={() => handleClick("phones")}>
+          Mobile Accessories
+        </button>
+        <button className="btn  custom-btn m-0" onClick={() => handleClick("Smart Watches")}>
+          Smart Watches
+        </button>
+        <button className="btn  custom-btn m-0" onClick={() => handleClick("Child Care")}>
+          Child Care
+        </button>
+        <button className="btn  custom-btn m-0" onClick={() => handleClick("Art and Craft")}>
+          Art and Craft
+        </button>
+        <button className="btn  custom-btn m-0" onClick={() => handleClick("Makeup")}>
+          Makeup
+        </button>
       </div>
 
       <div className="background-circle">
