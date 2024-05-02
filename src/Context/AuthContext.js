@@ -10,10 +10,10 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
-  const [cartItems, setCartItems] = useState(
+    const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || []
   );
-
+  const [searchTerm, setSearchTerm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   // Initialize cart count based on the length of cartItems
@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("username");
     localStorage.setItem("isLoggedIn", false);
   };
+
 
   const login = () => {
     setIsLoggedIn(true);
@@ -63,6 +64,10 @@ export const AuthProvider = ({ children }) => {
     setCartCount((prevCount) => prevCount - 1);
   };
 
+  const setSearchTermValue = (term) => {
+    setSearchTerm(term);
+  };
+
   // Update localStorage when cartCount changes
   useEffect(() => {
     localStorage.setItem("cartCount", cartCount);
@@ -87,9 +92,12 @@ export const AuthProvider = ({ children }) => {
         isLoggedIn,
         addToCart,
         cartCount,
+
         setCartCount,
         setCartItems,
         login,
+        searchTerm,
+        setSearchTermValue,
         cartItems,
         errorMessage,
         setErrorMessage,
