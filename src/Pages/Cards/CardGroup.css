@@ -23,7 +23,7 @@
   transition: transform 0.3s ease-in-out;
 }
 .card:hover .card-img-top {
-  transform: translateY(-15px); /* Move the image 5 pixels upwards on hover */
+  transform: translateY(-15px); /* Move the image 15 pixels upwards on hover */
 }
 
 .card-body {

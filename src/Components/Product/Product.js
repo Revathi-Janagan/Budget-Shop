@@ -106,9 +106,7 @@ const Product = () => {
                   </div>
 
                   <hr />
-                  <button className="btn btn-primary custom-button-buy">
-                    Buy
-                  </button>
+                  
                   <button
                     className="btn btn-primary custom-button-addcart"
                     onClick={handleAddToCart}

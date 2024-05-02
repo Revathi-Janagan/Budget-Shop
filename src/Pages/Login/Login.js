@@ -7,7 +7,7 @@ import "./Login.css";
 const Login = () => {
   const [activeTab, setActiveTab] = useState("login");
   const navigate = useNavigate();
-  const { setUsernameValue, isLoggedIn, login } = useAuth();
+  const { setUsernameValue, login } = useAuth();
   const [loginFormData, setLoginFormData] = useState({
     loginUserName: "",
     loginPassword: "",
@@ -25,7 +25,7 @@ const Login = () => {
       [name]: value,
     }));
   };
-  
+
   const handleInputChangeSignup = (e) => {
     const { name, value } = e.target;
     setSignupFormData((prevState) => ({
@@ -33,45 +33,43 @@ const Login = () => {
       [name]: value,
     }));
   };
-  
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-  
+
     // Check if username and password are not empty
     if (!loginFormData.loginUserName || !loginFormData.loginPassword) {
       alert("Please enter both username and password.");
       return;
     }
-  
+
     axios
       .post(
-        'https://dummyjson.com/auth/login',
+        "https://dummyjson.com/auth/login",
         {
           username: loginFormData.loginUserName, //kminchelle
           password: loginFormData.loginPassword, //0lelplR
-          expiresInMins: 30,
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       )
       .then((response) => {
-        console.log('Login Success:', response.data);
-        alert('Login Success');
+        console.log("Login Success:", response.data);
+        alert("Login Success");
         const { username } = response.data; // Extract the username from the response
         setUsernameValue(username); // Update the username in the AuthContext
         login();
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
-        console.error('Login Error:', error);
-        alert('Login failed. Please try again.');
+        console.error("Login Error:", error);
+        alert("Login failed. Please try again.");
       });
   };
-  
+
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     console.log("Signup Details:", setSignupFormData);
@@ -138,7 +136,7 @@ const Login = () => {
                         onChange={handleInputChangeLogin}
                       />
                     </div>
-                    
+
                     <div className="group">
                       <button type="submit" className="button">
                         Sign In

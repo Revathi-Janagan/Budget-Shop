@@ -124,9 +124,7 @@
   right: 0;
   transform: scale(0) rotate(0);
 }
-.login-space .group .check:checked + label {
-  color: #530e0e;
-}
+
 
 *,
 :after,

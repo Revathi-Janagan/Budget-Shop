@@ -2,10 +2,11 @@ import React from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { calculateFinalPrice } from "../../Helpers/Util/Utils";
 import { useNavigate } from "react-router-dom";
-import "./ViewCart.css"; 
+import oops from "../../Assets/oops image.png";
+import "./ViewCart.css";
 
 const ViewCart = () => {
-  const { cartItems, removeFromCart, setCartItems ,setCartCount } = useAuth();
+  const { cartItems, removeFromCart, setCartItems, setCartCount } = useAuth();
   const navigate = useNavigate();
 
   const handleRemoveFromCart = (productId) => {
@@ -22,9 +23,15 @@ const ViewCart = () => {
   };
 
   const handleBuy = () => {
-    setCartCount(0);
-    setCartItems([]);
-    navigate("/buypage");
+    if (cartItems.length === 0) {
+    
+      alert("Your cart is empty. Please add items before proceeding to checkout.");
+    } else {
+      // Reset cart count and items
+      setCartCount(0);
+      setCartItems([]);      
+      navigate(`/buypage`);
+    }
   };
 
   return (
@@ -103,7 +110,20 @@ const ViewCart = () => {
             </div>
           ))
         ) : (
-          <p>No items in the cart</p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={oops}
+              alt="oops"
+              style={{ width: "200px", height: "250px" }}
+            />
+            <h4>No items in the cart</h4>
+          </div>
         )}
       </div>
 
@@ -117,7 +137,7 @@ const ViewCart = () => {
         <div className="row">
           <div className="col-md-6">
             <button className="btn btn-success buy-btn" onClick={handleBuy}>
-              Buy
+             Checkout
             </button>
           </div>
         </div>

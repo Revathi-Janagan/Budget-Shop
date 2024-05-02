@@ -28,13 +28,13 @@
   }
   
   .about-content {
-    padding: 50px 0; /* Add padding for better readability */
+    padding: 50px 0;
   }
   
   .about-content h2 {
-    font-size: 28px; /* Increase font size for headings */
-    color: #333; /* Set text color */
-    margin-bottom: 20px; /* Add space below headings */
+    font-size: 28px; 
+    color: #333; 
+    margin-bottom: 20px; 
   }
   
   .about-content p {

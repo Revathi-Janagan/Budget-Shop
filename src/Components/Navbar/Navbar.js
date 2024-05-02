@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import Logovideo from "../../Assets/LogoFinal.gif";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const { logout, cartCount, setSearchTermValue, searchTerm,cartItems } = useAuth();
+  const { logout, cartCount } = useAuth();
 
   const handleLogout = () => {
     logout();
   };
-  const dynamicCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg ">
+      <nav className="navbar navbar-expand-lg navbar-expand-sm">
         <div className="container-fluid">
           <img className="logo-set" src={Logovideo} alt="Logo"></img>
 
@@ -120,7 +119,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div className="container"></div>
+      
     </>
   );
 };

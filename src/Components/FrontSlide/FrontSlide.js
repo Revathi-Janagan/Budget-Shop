@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Slide from "../../Assets/slide1.png";
 import { useAuth } from "../../Context/AuthContext";
@@ -9,9 +10,8 @@ import {
   faGoogle,
 } from "@fortawesome/free-brands-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-
 import "./FrontSlide.css";
-import CardGroup from "../../Pages/Cards/CardGroup";
+
 
 const FrontSlide = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,10 +24,13 @@ const FrontSlide = () => {
   }, []);
 
   const fetchCategories = () => {
-    fetch('https://dummyjson.com/products/categories')
-      .then(res => res.json())
-      .then(data => setCategories(data))
-      .catch(error => console.error('Error fetching categories:', error));
+    axios.get('https://dummyjson.com/products/categories')
+      .then(response => {
+        setCategories(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
   };
 
   const handleClick = (category) => {
